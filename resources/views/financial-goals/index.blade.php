@@ -82,6 +82,12 @@
                                 $daysLeft = $goal->target_date ? now()->diffInDays($goal->target_date, false) : null;
                                 $isCompleted = $goal->is_completed;
                                 $progressBarColor = $isCompleted ? 'bg-green-500' : 'bg-blue-500';
+
+                                // Calculate total duration in days
+                                $totalDurationDays = null;
+                                if ($goal->start_date && $goal->target_date) {
+                                    $totalDurationDays = $goal->start_date->diffInDays($goal->target_date);
+                                }
                             @endphp
                             
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition duration-300">
@@ -130,15 +136,15 @@
                                         </div>
                                     </div>
                                     
-                                    @if($daysLeft !== null && !$isCompleted)
+                                    @if($totalDurationDays !== null)
+                                        <div class="mt-4 text-sm text-gray-600">
+                                            <p>{{ __('Durée totale prévue') }}: {{ $totalDurationDays }} {{ $totalDurationDays > 1 ? __('jours') : __('jour') }}</p>
+                                        </div>
+                                    @endif
+
+                                    @if($goal->target_date && !$isCompleted)
                                         <div class="mt-4 text-sm {{ $daysLeft < 0 ? 'text-red-600' : 'text-gray-600' }}">
-                                            @if($daysLeft < 0)
-                                                {{ __('Dépassé de') }} {{ abs($daysLeft) }} {{ abs($daysLeft) > 1 ? __('jours') : __('jour') }}
-                                            @elseif($daysLeft === 0)
-                                                {{ __('Dernier jour') }}
-                                            @else
-                                                {{ __('Reste') }} {{ $daysLeft }} {{ $daysLeft > 1 ? __('jours') : __('jour') }}
-                                            @endif
+                                            {{ $goal->remaining_time }}
                                         </div>
                                     @endif
                                     

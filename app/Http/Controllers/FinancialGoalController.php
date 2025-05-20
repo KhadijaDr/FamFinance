@@ -9,9 +9,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class FinancialGoalController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Affiche la liste des objectifs financiers.
      */
@@ -40,9 +43,9 @@ class FinancialGoalController extends Controller
         // Pagination des résultats
         $goals = $query->orderBy('created_at', 'desc')->paginate(9);
         
-        // Calculer la progression pour chaque objectif
+        // Calculer les informations dynamiques pour chaque objectif
         foreach ($goals as $goal) {
-            $this->calculateProgress($goal);
+            $goal->remaining_time = $this->calculateRemainingTime($goal->target_date);
         }
         
         return view('financial-goals.index', compact(
@@ -247,5 +250,50 @@ class FinancialGoalController extends Controller
         
         // Montant restant à atteindre
         $goal->remaining_amount = max($goal->target_amount - $goal->current_amount, 0);
+    }
+
+    /**
+     * Calcule le temps restant en jours, heures et minutes.
+     */
+    private function calculateRemainingTime(string $targetDate): string
+    {
+        $targetCarbon = Carbon::parse($targetDate);
+        $now = Carbon::now();
+        $diff = $now->diff($targetCarbon);
+
+        $parts = [];
+
+        if ($diff->days > 0) {
+            $parts[] = $diff->days . ' ' . ($diff->days > 1 ? __('jours') : __('jour'));
+        }
+
+        // Seulement ajouter heures/minutes si moins d'un jour restant ou si heures/minutes sont > 0
+        if ($diff->days == 0 || $diff->h > 0) {
+             if ($diff->h > 0) {
+                $parts[] = $diff->h . ' ' . ($diff->h > 1 ? __('heures') : __('heure'));
+            }
+             if ($diff->i > 0) {
+                $parts[] = $diff->i . ' ' . ($diff->i > 1 ? __('minutes') : __('minute'));
+             }
+        }
+
+        $remaining = implode(' et ', array_filter([implode(', ', array_slice($parts, 0, -1)), last($parts)]));
+
+        if ($diff->invert) { // Date in the past
+            if ($diff->days < 1) {
+                return __('Date limite dépassée de moins d\'un jour');
+            } else {
+                return __('Date limite dépassée de') . ' ' . $remaining;
+            }
+        } else { // Date in the future or today
+            if ($diff->days < 1 && count($parts) == 0) {
+                 return __('Date limite aujourd\'hui');
+            } elseif (empty($remaining)){
+                return __('Moins d\'une minute restante');
+            }
+            else {
+                return __('Date limite dans') . ' ' . $remaining;
+            }
+        }
     }
 } 

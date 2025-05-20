@@ -119,7 +119,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category): View
     {
-        $this->authorize('view', $category);
+        // Vérifier que la catégorie appartient à l'utilisateur connecté
+        if ($category->user_id !== Auth::id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à voir cette catégorie.');
+        }
         
         // Récupérer les 10 dernières transactions de cette catégorie
         $recentTransactions = Transaction::where('category_id', $category->id)
@@ -138,6 +141,10 @@ class CategoryController extends Controller
             
         $netAmount = $totalIncome - $totalExpense;
         
+        // Compter le nombre total de transactions
+        $transactions_count = Transaction::where('category_id', $category->id)->count();
+        $category->transactions_count = $transactions_count;
+        
         return view('categories.show', compact(
             'category',
             'recentTransactions',
@@ -152,7 +159,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): View
     {
-        $this->authorize('update', $category);
+        // Vérifier que la catégorie appartient à l'utilisateur connecté
+        if ($category->user_id !== Auth::id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à modifier cette catégorie.');
+        }
         
         // Liste de couleurs pour le sélecteur
         $colors = [
@@ -176,7 +186,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category): RedirectResponse
     {
-        $this->authorize('update', $category);
+        // Vérifier que la catégorie appartient à l'utilisateur connecté
+        if ($category->user_id !== Auth::id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à modifier cette catégorie.');
+        }
         
         $request->validate([
             'name' => 'required|string|max:255',
@@ -215,7 +228,10 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, Category $category): RedirectResponse
     {
-        $this->authorize('delete', $category);
+        // Vérifier que la catégorie appartient à l'utilisateur connecté
+        if ($category->user_id !== Auth::id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à supprimer cette catégorie.');
+        }
         
         // Vérifier si la catégorie a des transactions
         $hasTransactions = Transaction::where('category_id', $category->id)->exists();

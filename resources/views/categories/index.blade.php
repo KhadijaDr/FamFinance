@@ -209,7 +209,7 @@
                                             
                                             @php
                                                 $totalAmount = $category->type === 'income' ? ($category->total_income ?? 0) : ($category->total_expense ?? 0);
-                                                $formattedAmount = number_format($totalAmount, 2, ',', ' ') . ' €';
+                                                $formattedAmount = number_format($totalAmount, 2, ',', ' ') . ' MAD';
                                             @endphp
                                             
                                             <div class="flex items-center justify-between text-sm mt-1">

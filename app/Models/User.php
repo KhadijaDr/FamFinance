@@ -52,14 +52,11 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
+    protected $casts = [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
         ];
-    }
 
     /**
      * Get the URL to the user's profile photo.
@@ -123,5 +120,10 @@ class User extends Authenticatable
     public function financialGoals(): HasMany
     {
         return $this->hasMany(FinancialGoal::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }
