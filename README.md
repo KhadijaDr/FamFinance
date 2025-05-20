@@ -26,7 +26,7 @@ FamFinance est une application web de gestion financière familiale développée
 ### 1. Clonez le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/FamFinance.git
+git clone https://github.com/Duja1323/FamFinance.git
 cd FamFinance
 ```
 
