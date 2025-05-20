@@ -23,7 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/transactions/reports', [TransactionController::class, 'reports'])->name('transactions.reports');
     
     // Catégories
-    Route::get('/categories/initialize-default', [CategoryController::class, 'initializeDefault'])->name('categories.initialize-default');
+    Route::get('/default-categories', [CategoryController::class, 'initializeDefault'])->name('categories.initialize-default');
     Route::resource('categories', CategoryController::class);
     
     // Budgets
