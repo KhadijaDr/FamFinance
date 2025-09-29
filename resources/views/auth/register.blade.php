@@ -7,7 +7,6 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nom')" class="text-gray-700" />
             <div class="relative mt-1">
@@ -19,7 +18,6 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" class="text-gray-700" />
             <div class="relative mt-1">
@@ -31,7 +29,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Mot de passe')" class="text-gray-700" />
             <div class="relative mt-1">
@@ -50,7 +47,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirmez le mot de passe')" class="text-gray-700" />
             <div class="relative mt-1">

@@ -149,7 +149,7 @@
                                                         <svg class="flex-shrink-0 mr-1 h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                                         </svg>
-                                                        {{ $transaction->transaction_date->format('d/m/Y H:i') }}
+                                                        {{ $transaction->transaction_date ? $transaction->transaction_date->format('d/m/Y H:i') : __('Date inconnue') }}
                                                     </p>
                                                     <p class="flex items-center">
                                                          <svg class="flex-shrink-0 mr-1 h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -89,7 +89,7 @@
                                 @forelse($transactions as $transaction)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $transaction->date->format('d/m/Y') }}
+                                        {{ $transaction->transaction_date ? $transaction->transaction_date->format('d/m/Y') : __('Date inconnue') }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {{ $transaction->description }}

@@ -6,16 +6,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'FamFinance') }}</title>
-        
-        <!-- Favicon -->
+
         <link rel="icon" href="{{ asset('images/logo.png') }}">
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         <style>
@@ -147,7 +144,6 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             <div class="flex">
-                <!-- Sidebar -->
                 @auth
                 <div class="sidebar-gradient text-white min-h-screen w-20 md:w-72 transition-all duration-500 ease-in-out z-30 shadow-xl backdrop-blur-sm flex flex-col">
                     <div class="h-20 flex-shrink-0 flex items-center justify-center md:justify-start px-3 border-b border-indigo-700/50 backdrop-filter backdrop-blur-sm bg-indigo-900/70">
@@ -220,8 +216,7 @@
                             </div>
                         </nav>
                     </div>
-                    
-                    <!-- Profil utilisateur maintenant positionné tout en bas -->
+
                     <div class="flex-shrink-0 px-4 py-4 border-t border-indigo-700/30">
                         <div class="px-3 py-3 rounded-lg bg-indigo-950/50 shadow-inner backdrop-blur-sm transition-all duration-300 hover:bg-indigo-900/60 border border-indigo-800/30">
                             <div class="flex items-center">
@@ -250,14 +245,12 @@
                     </div>
                 </div>
                 @endauth
-                
-                <!-- Main content -->
+
                 <div class="flex-1 main-content-scrollable">
-                    <!-- Top Bar with Search and Notifications -->
+
                     <div class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div class="flex justify-between h-16">
-                                <!-- Hamburger for mobile -->
                                 <div class="flex items-center md:hidden">
                                     <button type="button" class="text-gray-500 hover:text-gray-700">
                                         <i class="fas fa-bars text-xl"></i>

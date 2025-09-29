@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <!-- Session Status -->
+  
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <div class="text-center mb-6">
@@ -10,7 +10,6 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" class="text-gray-700" />
             <div class="relative mt-1">
@@ -22,7 +21,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Mot de passe')" class="text-gray-700" />
             <div class="relative mt-1">
@@ -41,7 +39,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">

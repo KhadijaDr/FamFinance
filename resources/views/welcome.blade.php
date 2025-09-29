@@ -20,13 +20,12 @@
     </head>
     <body class="antialiased">
         <div class="bg-gradient-to-b from-blue-50 to-indigo-100 min-h-screen">
-            <!-- Navigation -->
             <header class="bg-white shadow-sm">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex items-center">
                             <a href="{{ url('/') }}" class="flex items-center">
-                                <img src="./images/logo.png" alt="FamFinance Logo" class="h-10 w-auto mr-2">
+                                <img src="./images/logo.png" alt="FamFinance Logo" class="h-12 w-auto mr-2">
                             
                             </a>
                         </div>
@@ -78,7 +77,6 @@
                 </div>
             </div>
 
-            <!-- Features section -->
             <div id="fonctionnalites" class="py-16 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center">
@@ -141,7 +139,6 @@
                 </div>
             </div>
 
-            <!-- Testimonial -->
             <div class="py-16 bg-gradient-to-r from-indigo-500 to-purple-600">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="lg:flex lg:items-center lg:justify-between">
@@ -186,14 +183,12 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <footer class="bg-white">
                 <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                     <div class="md:flex md:items-center md:justify-between">
                         <div class="flex justify-center md:justify-start">
                             <a href="{{ url('/') }}" class="flex items-center">
-                                <img src="{{ asset('images/logo.png') }}" alt="FamFinance Logo" class="h-8 w-auto mr-2">
-                                <span class="text-lg font-bold text-gray-900">FamFinance</span>
+                                <img src="{{ asset('images/logo.png') }}" alt="FamFinance Logo" class="h-16 w-auto mr-2">
                             </a>
                         </div>
                         <div class="mt-8 md:mt-0">

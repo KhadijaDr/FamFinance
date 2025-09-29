@@ -21,12 +21,11 @@ class CategorySeeder extends Seeder
             // Si aucun utilisateur n'est connecté, on utilise l'admin par défaut
             $user = User::where('email', 'admin@famfinance.com')->first();
             if (!$user) {
-                // Si l'admin n'existe pas, on ne peut pas continuer
+            
                 return;
             }
         }
 
-        // Catégories de dépenses
         $expenseCategories = [
             ['name' => 'Alimentation', 'icon' => 'fa-shopping-cart', 'color' => '#4CAF50', 'type' => 'expense'],
             ['name' => 'Logement', 'icon' => 'fa-home', 'color' => '#2196F3', 'type' => 'expense'],
@@ -40,7 +39,6 @@ class CategorySeeder extends Seeder
             ['name' => 'Autres dépenses', 'icon' => 'fa-ellipsis-h', 'color' => '#9E9E9E', 'type' => 'expense'],
         ];
 
-        // Catégories de revenus
         $incomeCategories = [
             ['name' => 'Salaire', 'icon' => 'fa-wallet', 'color' => '#4CAF50', 'type' => 'income'],
             ['name' => 'Freelance', 'icon' => 'fa-laptop', 'color' => '#2196F3', 'type' => 'income'],
@@ -50,18 +48,15 @@ class CategorySeeder extends Seeder
             ['name' => 'Autres revenus', 'icon' => 'fa-ellipsis-h', 'color' => '#9E9E9E', 'type' => 'income'],
         ];
 
-        // Fusionner les catégories
         $categories = array_merge($expenseCategories, $incomeCategories);
 
-        // Créer les catégories
         foreach ($categories as $category) {
-            // Vérifier si la catégorie existe déjà pour cet utilisateur
+  
             $exists = Category::where('user_id', $user->id)
                 ->where('name', $category['name'])
                 ->where('type', $category['type'])
                 ->exists();
-                
-            // Si elle n'existe pas, on la crée
+
             if (!$exists) {
                 Category::create([
                     'user_id' => $user->id,
